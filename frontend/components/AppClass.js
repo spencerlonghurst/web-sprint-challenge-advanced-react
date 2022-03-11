@@ -24,15 +24,29 @@ export default class AppClass extends React.Component {
     })
   }
 
-
-
-
   changeLeft = () => {
-  this.setState({
-    ...this.state, 
-    grid: { ...this.state.grid, x: this.state.grid.x - 1 }
-  })
+    this.setState({
+      ...this.state, 
+      grid: { ...this.state.grid, x: this.state.grid.x - 1 }
+    })
+    }
+
+  changeDown = () => {
+    this.setState({
+      ...this.state,
+      grid: { ...this.state.grid, y: this.state.grid.y - 1 }
+    })
   }
+
+  changeUp = () => {
+    this.setState({
+      ...this.state,
+      grid: { ...this.state.grid, y: this.state.grid.y + 1 }
+    })
+  }
+
+
+ 
 
 
 
@@ -101,9 +115,9 @@ export default class AppClass extends React.Component {
         </div>
         <div id="keypad">
           <button id="left" onClick={this.changeLeft}>LEFT</button>
-          <button id="up">UP</button>
+          <button id="up" onClick={this.changeUp}>UP</button>
           <button id="right" onClick={this.changeRight}>RIGHT</button>
-          <button id="down">DOWN</button>
+          <button id="down" onClick={this.changeDown}>DOWN</button>
           <button id="reset">reset</button>
         </div>
         <form>
