@@ -20,36 +20,59 @@ export default class AppClass extends React.Component {
     this.state = initialState
   }
 
+
   changeRight = () => {
-    this.setState({
-      ...this.state,
-      grid: { ...this.state.grid, x: this.state.grid.x + 1 },
-      steps: this.state.steps + 1 
-    })
+    if (this.state.grid.x < 3) {
+      this.setState({
+        ...this.state,
+        grid: { ...this.state.grid, x: this.state.grid.x + 1 },
+        steps: this.state.steps + 1 
+      })
+    } else {
+      this.setState({ ...this.state, errorMessage: `You can't go right`})   
+    }
+
+    
   }
 
   changeLeft = () => {
-    this.setState({
-      ...this.state, 
-      grid: { ...this.state.grid, x: this.state.grid.x - 1 },
-      steps: this.state.steps + 1 
-    })
+
+    if (this.state.grid.x > 1) {
+      this.setState({
+        ...this.state, 
+        grid: { ...this.state.grid, x: this.state.grid.x - 1 },
+        steps: this.state.steps + 1 
+      })
+    } else {
+      this.setState({ ...this.state, errorMessage: `You can't go left`}) 
+    }
+    
     }
 
   changeDown = () => {
-    this.setState({
-      ...this.state,
-      grid: { ...this.state.grid, y: this.state.grid.y + 1 },
-      steps: this.state.steps + 1 
-    })
+    if (this.state.grid.y < 3) {
+      this.setState({
+        ...this.state,
+        grid: { ...this.state.grid, y: this.state.grid.y + 1 },
+        steps: this.state.steps + 1 
+      })
+    } else {
+      this.setState({ ...this.state, errorMessage: `You can't go down`}) 
+    }
+    
   }
 
   changeUp = () => {
-    this.setState({
-      ...this.state,
-      grid: { ...this.state.grid, y: this.state.grid.y - 1 },
-      steps: this.state.steps + 1 
-    })
+    if (this.state.grid.y > 1) {
+      this.setState({
+        ...this.state,
+        grid: { ...this.state.grid, y: this.state.grid.y - 1 },
+        steps: this.state.steps + 1 
+      })
+    } else {
+      this.setState({ ...this.state, errorMessage: `You can't go up`}) 
+    }
+    
   }
 
 
