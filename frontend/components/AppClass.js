@@ -75,13 +75,6 @@ export default class AppClass extends React.Component {
     
   }
 
-
-
-
-
-
-
-
   onToDoEmailChange = evt => {
     const { value } = evt.target;
     this.setState({
@@ -127,21 +120,7 @@ export default class AppClass extends React.Component {
     })
   }
 
-  // changeInput = (key, value) => {
-  //   console.log('STATE IS ABOUT TO CHANGE')
-  //   this.setState({
-  //     ...this.state,
-  //     form: { ...this.state.form, [key]: value },
-  //   })
-  // }
-
-
-
-
-
-
-
-
+  
   render() {
 
 
@@ -176,7 +155,6 @@ export default class AppClass extends React.Component {
         </div>
         <form onSubmit={this.onSubmit}>
           <input id="email" type="email" placeholder="type email" onChange={this.onToDoEmailChange} value={this.state.email}></input> 
-          {/* value={this.state.} */}
           <input id="submit" type="submit"></input>
         </form>
       </div>
