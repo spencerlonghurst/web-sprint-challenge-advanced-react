@@ -11,6 +11,7 @@ const initialState = {
     steps: 0,
     email: '',
     errorMessage: '',
+    successMessage: '',
 }
 
 export default class AppClass extends React.Component {
@@ -51,21 +52,47 @@ export default class AppClass extends React.Component {
     })
   }
 
+
+
+
+
+
+
+
   onToDoEmailChange = evt => {
     const { value } = evt.target;
-    this.setState({ ...this.state, email: value })
+    this.setState({
+      ...this.state, email: value 
+    })
   }
 
+  resetForm = () => this.setState({ ...this.state, email: ''})
+  
+  resetBtn = () => this.setState({ ...this.state,
+    grid: {
+      x: 2,
+      y: 2,
+    },
+    steps: 0,
+    email: ''
+  })
  
 
   onSubmit = evt => {
     evt.preventDefault()
-    axios.post(URL)
+    axios.post(URL, { steps: this.state.steps, y: this.state.grid.y,  x: this.state.grid.x, email: this.state.email })
     .then(res => {
       this.setState({
         ...this.state,
-        email: this.state.email
+        successMessage: res.data.message,
+        email: this.state.email,
+        steps: this.state.steps,
+        grid: {
+          x: this.state.grid.x,
+          y: this.state.grid.y
+        }
       })
+      this.resetForm()
     })
     .catch(err => {
       this.setState({ ...this.state, errorMessage: err.response.data.message })  
@@ -88,7 +115,6 @@ export default class AppClass extends React.Component {
 
 
   render() {
-    console.log('state is', this.state)
 
 
 
@@ -111,17 +137,18 @@ export default class AppClass extends React.Component {
           <div className={`square ${this.state.grid.x === 3 && this.state.grid.y === 3  ? 'active' : ''}`}>{`${this.state.grid.x === 3 && this.state.grid.y === 3  ? 'B' : ''}`}</div>
         </div>
         <div className="info">
-          <h3 id="message">{this.state.errorMessage}</h3>
+          <h3 id="message">{this.state.errorMessage}{this.state.successMessage}</h3>
         </div>
         <div id="keypad">
           <button id="left" onClick={this.changeLeft}>LEFT</button>
           <button id="up" onClick={this.changeUp}>UP</button>
           <button id="right" onClick={this.changeRight}>RIGHT</button>
           <button id="down" onClick={this.changeDown}>DOWN</button>
-          <button id="reset">reset</button>
+          <button id="reset" onClick={this.resetBtn}>reset</button>
         </div>
         <form onSubmit={this.onSubmit}>
-          <input id="email" type="email" placeholder="type email" onChange={this.onToDoEmailChange}></input>
+          <input id="email" type="email" placeholder="type email" onChange={this.onToDoEmailChange} value={this.state.email}></input> 
+          {/* value={this.state.} */}
           <input id="submit" type="submit"></input>
         </form>
       </div>
